@@ -5,6 +5,8 @@ export type PriceType = {
   small?: string;
   vCPU?: string;
   gBRAM?: string;
+  selected?: boolean;
+  onClick?: () => void;
 
   /** Style props */
   propBackgroundColor?: CSSProperties["backgroundColor"];
@@ -28,13 +30,15 @@ const Price: FunctionComponent<PriceType> = ({
   propFlex,
   propDisplay,
   propMinWidth,
+  selected = false,
+  onClick,
 }) => {
   const frameStyle: CSSProperties = useMemo(() => {
     return {
-      backgroundColor: propBackgroundColor,
-      border: propBorder,
+      backgroundColor: selected ? "#D1E7FF" : propBackgroundColor,
+      border: selected ? "2px solid #1a73e8" : propBorder,
     };
-  }, [propBackgroundColor, propBorder]);
+  }, [propBackgroundColor, propBorder, selected]);
 
   const smallStyle: CSSProperties = useMemo(() => {
     return {
@@ -59,6 +63,7 @@ const Price: FunctionComponent<PriceType> = ({
   return (
     <div
       className={`flex-1 rounded-md border-silver-200 border-[1px] border-solid box-border flex flex-col items-start justify-start pt-[15px] px-4 pb-4 gap-[0.1px] min-w-[184px] text-left text-sm text-darkgray font-text-sm-regular ${className}`}
+      onClick={onClick}
     >
       <div className="w-12 flex flex-row items-start justify-start pt-0 px-0 pb-[3px] box-border text-xs text-darkorchid-100">
         <div

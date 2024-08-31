@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import SidebarNavigation from "../components/SidebarNavigation";
 import SectionHeader from "../components/SectionHeader";
 import InputLabelPairs from "../components/InputLabelPairs";
@@ -6,6 +6,27 @@ import Price from "../components/Price";
 import AvatarAddButton from "../components/AvatarAddButton";
 
 const Assignment: FunctionComponent = () => {
+  const [port, setPort] = useState<string>("");
+  const [command, setCommand] = useState<string>("");
+  const [argumentsValue, setArgumentsValue] = useState<string>("");
+  const [envVariables, setEnvVariables] = useState<string>("");
+  const [selectedPriceId, setSelectedPriceId] = useState<number | null>(null);
+
+  const handleDeploy = () => {
+    console.log("Port:", port);
+    console.log("Command:", command);
+    console.log("Arguments:", argumentsValue);
+    console.log("Environment Variables:", envVariables);
+    console.log("Selected Price ID:", selectedPriceId);
+
+    if (!port || !command || !argumentsValue || !envVariables || selectedPriceId === null) {
+      alert("Please ensure all fields are filled and a pricing plan is selected.");
+      return;
+    }
+
+    alert("Successfully deployed.");
+  };
+
   return (
     <div className="w-full relative bg-base-white overflow-hidden flex flex-row items-start justify-start leading-[normal] tracking-[normal] mq1000:pl-5 mq1000:pr-5 mq1000:box-border">
       <SidebarNavigation />
@@ -23,11 +44,6 @@ const Assignment: FunctionComponent = () => {
                     src="/arrowleft.svg"
                   />
                   <a className="[text-decoration:none] relative leading-[20px] font-medium text-[inherit] inline-block min-w-[34px]">{`Back `}</a>
-                  <img
-                    className="h-5 w-5 relative overflow-hidden shrink-0 hidden min-h-[20px]"
-                    alt=""
-                    src="/placeholder1.svg"
-                  />
                 </div>
               </div>
               <div className="h-[82px] flex flex-row items-start justify-start py-0 pl-px pr-1 box-border max-w-full text-xs text-silver-100 mq450:h-auto">
@@ -41,17 +57,6 @@ const Assignment: FunctionComponent = () => {
                         src="/vector.svg"
                       />
                     </div>
-                    <div className="hidden flex-row items-center justify-start gap-[3px]">
-                      <div className="h-[5px] w-[5px] relative rounded-[50%] bg-darkorchid-100" />
-                      <div className="h-[5px] w-[5px] relative rounded-[50%] bg-darkorchid-200" />
-                      <div className="h-[5px] w-[5px] relative rounded-[50%] bg-darkorchid-300" />
-                      <div className="h-[5px] w-[5px] relative rounded-[50%] bg-darkorchid-400" />
-                    </div>
-                    <img
-                      className="h-6 w-6 relative hidden"
-                      alt=""
-                      src="/svg.svg"
-                    />
                   </div>
                   <div className="w-[279px] flex flex-row items-center justify-start gap-9 shrink-0 mq450:gap-[18px]">
                     <div className="flex-1 flex flex-col items-start justify-center gap-1">
@@ -152,7 +157,7 @@ const Assignment: FunctionComponent = () => {
                         <div className="relative tracking-[-0.36px] leading-[24px] font-medium inline-block min-w-[15px] mq450:text-lg mq450:leading-[19px]">
                           3
                         </div>
-                      </div>                                    
+                      </div>
                     </div>
                     <div className="flex-1 relative text-lg tracking-[-0.5px] font-medium text-ghostwhite-200">
                       Go Live
@@ -175,131 +180,70 @@ const Assignment: FunctionComponent = () => {
                 <InputLabelPairs
                   labelProjectName="Port"
                   inputValuesPlaceholder="8088"
+                  value={port}
+                  onChange={(e) => setPort(e.target.value)}
                 />
                 <InputLabelPairs
                   propHeight="unset"
                   labelProjectName="Command"
                   propWidth="132px"
                   propFlex="unset"
-                  inputValuesPlaceholder="My-deployment"
+                  inputValuesPlaceholder="npm start"
+                  value={command}
+                  onChange={(e) => setCommand(e.target.value)}
                 />
                 <InputLabelPairs
                   propHeight="unset"
-                  labelProjectName="Arguments "
+                  labelProjectName="Arguments"
                   propWidth="132px"
                   propFlex="unset"
-                  inputValuesPlaceholder="My-deployment"
+                  inputValuesPlaceholder="--production"
+                  value={argumentsValue}
+                  onChange={(e) => setArgumentsValue(e.target.value)}
                 />
                 <InputLabelPairs
                   propHeight="147.2px"
-                  labelProjectName="Environment Variables "
+                  labelProjectName="Environment Variables"
                   propWidth="160px"
                   propFlex="1"
-                  inputValuesPlaceholder="ENV_NAME=ENV_VALUE"
+                  inputValuesPlaceholder="NODE_ENV=production"
+                  value={envVariables}
+                  onChange={(e) => setEnvVariables(e.target.value)}
                 />
-                <div className="self-stretch h-[77px] relative hidden">
-                  <div className="absolute top-[0px] left-[0px] leading-[24px] flex items-center w-[98px] h-6">
-                    Select Branch
-                  </div>
-                  <div className="absolute w-full top-[calc(50%_-_12.5px)] right-[-1px] left-[0px] rounded-md bg-gray1-400 border-silver-200 border-[1px] border-solid box-border h-[49px] overflow-x-auto flex flex-row items-center justify-start py-4 px-3 gap-2.5 text-whitesmoke-100 font-geist">
-                    <img
-                      className="h-[11.4px] w-[11.4px] relative shrink-0"
-                      alt=""
-                      src="/vector-1.svg"
-                    />
-                    <div className="h-5 w-[707px] relative overflow-hidden shrink-0">
-                      <div className="absolute top-[-0.4px] left-[0px] leading-[20px] flex items-center w-[36.9px]">
-                        Other
-                      </div>
-                    </div>
-                    <img
-                      className="h-[18px] w-[18px] relative shrink-0"
-                      alt=""
-                      src="/svg1.svg"
-                    />
-                  </div>
-                </div>
-                <div className="self-stretch h-[175.6px] relative rounded-md bg-gray1-500 border-silver-200 border-[1px] border-solid box-border hidden">
-                  <div className="absolute w-[calc(100%_-_1.6px)] top-[0.8px] right-[0.8px] left-[0.8px] h-12">
-                    <div className="absolute top-[12.2px] left-[12.2px] leading-[24px] flex items-center w-[177px] h-6">
-                      Environment Variables
-                    </div>
-                  </div>
-                  <div className="absolute w-[calc(100%_-_25.6px)] top-[60.8px] right-[12.8px] left-[12.8px] h-[106px] text-smi text-darkgray">
-                    <div className="absolute w-full top-[0.2px] right-[0.2px] left-[0.2px] h-[82px]">
-                      <div className="absolute h-[calc(100%_+_8px)] w-[calc(100%_-_104px)] top-[0.2px] right-[103.8px] bottom-[-8.2px] left-[0.2px]">
-                        <div className="absolute w-[calc(100%_-_335px)] top-[0px] right-[335px] left-[0px] h-[81px]">
-                          <div className="absolute top-[-0.2px] left-[-0.2px] leading-[24px] capitalize flex items-center w-[27px] h-6">
-                            Key
-                          </div>
-                          <div className="absolute w-full top-[32px] right-[-0.2px] left-[0px] rounded-8xs bg-gray1-400 border-silver-300 border-[1px] border-solid box-border h-[49px] overflow-hidden text-sm text-base-white">
-                            <div className="absolute w-[calc(100%_-_11.6px)] top-[calc(50%_-_13.5px)] right-[0.8px] left-[10.8px] h-[26px] overflow-hidden">
-                              <div className="absolute w-full top-[4px] right-[0px] left-[0px] h-[17.6px] overflow-hidden">
-                                <div className="absolute top-[0.8px] left-[0px] flex items-center w-[114px] h-[17px]">
-                                  EXAMPLE_NAME
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="absolute w-[calc(100%_-_356px)] top-[0px] right-[0px] left-[356px] h-[81px]">
-                          <div className="absolute top-[-0.2px] left-[0.2px] leading-[24px] capitalize flex items-center w-[152.3px] h-6">{`Value `}</div>
-                          <div className="absolute w-[calc(100%_+_0.2px)] top-[calc(50%_-_8.7px)] right-[0px] left-[-0.2px] rounded-8xs bg-gray1-400 border-silver-200 border-[1px] border-solid box-border h-[49px] text-sm text-base-white">
-                            <div className="absolute w-[calc(100%_-_1.6px)] top-[calc(50%_-_18.7px)] right-[0.8px] left-[0.8px] h-[38.4px] overflow-auto">
-                              <div className="absolute top-[6.8px] left-[9.8px] leading-[23.8px] flex items-center w-36 h-6">
-                                I9JU23NF394R6HH
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div className="w-[755.9px] flex flex-col items-start justify-start pt-0 px-0 pb-2 box-border gap-[5px] max-w-full">
                   <div className="w-40 relative leading-[24px] flex items-center">
                     Pricing Configuration
                   </div>
                   <div className="self-stretch flex flex-row items-start justify-start max-w-full text-lightsalmon">
                     <div className="flex-1 flex flex-row items-start justify-start gap-2.5 max-w-full mq750:flex-wrap">
-                      <div className="flex-1 rounded-md border-royalblue-100 border-[1px] border-solid box-border flex flex-col items-start justify-start pt-[15px] px-4 pb-4 gap-[3.5px] min-w-[184px]">
-                        <div className="w-[49px] rounded-md bg-gray1-300 border-darkred border-[1px] border-solid box-border flex flex-row items-start justify-start py-px px-[7px] text-xs">
-                          <a className="[text-decoration:none] relative leading-[18px] font-medium text-[inherit] inline-block min-w-[33px]">
-                            Micro
-                          </a>
-                        </div>
-                        <div className="flex flex-col items-start justify-start text-darkgray">
-                          <div className="w-[61.7px] relative leading-[21px] flex items-center">
-                            1 vCPU
-                          </div>
-                          <div className="relative leading-[21px] inline-block min-w-[65.2px]">
-                            1 GB RAM
-                          </div>
-                        </div>
-                        <div className="w-[168px] relative leading-[21px] flex items-center text-forestgreen">
-                          <span className="w-full">
-                            <span className="font-semibold">{`$0.027777 `}</span>
-                            <span className="text-gray1-100">/ hours</span>
-                          </span>
-                        </div>
-                      </div>
-                      <Price small="Small" vCPU="2 vCPU" gBRAM="2 GB RAM" />
                       <Price
-                        propBackgroundColor="rgba(26, 115, 232, 0.15)"
-                        propBorder="1px solid #1a73e8"
+                        small="Micro"
+                        vCPU="1 vCPU"
+                        gBRAM="1 GB RAM"
+                        selected={selectedPriceId === 1}
+                        onClick={() => setSelectedPriceId(1)}
+                      />
+                      <Price
+                        small="Small"
+                        vCPU="2 vCPU"
+                        gBRAM="2 GB RAM"
+                        selected={selectedPriceId === 2}
+                        onClick={() => setSelectedPriceId(2)}
+                      />
+                      <Price
                         small="Large"
-                        propColor="#1a73e8"
                         vCPU="4 vCPU"
-                        propWidth="unset"
                         gBRAM="4 GB RAM"
-                        propFlex="unset"
-                        propDisplay="inline-block"
-                        propMinWidth="75px"
+                        selected={selectedPriceId === 3}
+                        onClick={() => setSelectedPriceId(3)}
                       />
                     </div>
                   </div>
                 </div>
-                <button className="cursor-pointer [border:none] pt-0 px-0 pb-0 bg-[transparent] self-stretch h-[49px] rounded-t-none rounded-b-8xs [background:linear-gradient(90deg,_rgba(26,_115,_232,_0.05),_rgba(240,_40,_73,_0.05)_54%,_rgba(133,_59,_206,_0.05)_98.5%)] flex flex-row items-start justify-start box-border max-w-full">
+                <button
+                  className="cursor-pointer [border:none] pt-0 px-0 pb-0 bg-[transparent] self-stretch h-[49px] rounded-t-none rounded-b-8xs [background:linear-gradient(90deg,_rgba(26,_115,_232,_0.05),_rgba(240,_40,_73,_0.05)_54%,_rgba(133,_59,_206,_0.05)_98.5%)] flex flex-row items-start justify-start box-border max-w-full"
+                  onClick={handleDeploy}
+                >
                   <div className="flex-1 rounded-md border-royalblue-100 border-[1px] border-solid box-border flex flex-row items-start justify-center py-[13px] pl-[21px] pr-5 max-w-full">
                     <div className="w-[91px] relative text-base leading-[20px] font-medium font-text-sm-regular text-base-white text-center flex items-center justify-center shrink-0">
                       Deploy

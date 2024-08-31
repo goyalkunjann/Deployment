@@ -23,9 +23,13 @@ function App() {
     let metaDescription = "";
 
     switch (pathname) {
-      case "/":
-        title = "";
-        metaDescription = "";
+      case "/services/new":
+        title = "Service Configuration"; // Adjust the title as needed
+        metaDescription = "Configure your new service"; // Adjust the description as needed
+        break;
+      default:
+        title = "Home"; // Default title
+        metaDescription = "Welcome to our Application"; // Default description
         break;
     }
 
@@ -45,7 +49,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Assignment />} />
+      <Route path="/" element={<div>Home Page</div>} /> // Default home page route
+      <Route path="/services/new" element={<Assignment />} /> // Your specified route for the assignment UI
     </Routes>
   );
 }

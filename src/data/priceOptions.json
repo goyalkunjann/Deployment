@@ -1,0 +1,33 @@
+{
+    "prices": [
+      {
+        "id": 1,
+        "name": "Micro",
+        "vCPU": "1 vCPU",
+        "gBRAM": "1 GB RAM",
+        "pricePerHour": "$0.01"
+      },
+      {
+        "id": 2,
+        "name": "Small",
+        "vCPU": "2 vCPU",
+        "gBRAM": "2 GB RAM",
+        "pricePerHour": "$0.02"
+      },
+      {
+        "id": 3,
+        "name": "Medium",
+        "vCPU": "3 vCPU",
+        "gBRAM": "3 GB RAM",
+        "pricePerHour": "$0.03"
+      },
+      {
+        "id": 4,
+        "name": "Large",
+        "vCPU": "4 vCPU",
+        "gBRAM": "4 GB RAM",
+        "pricePerHour": "$0.04"
+      }
+    ]
+  }
+  
