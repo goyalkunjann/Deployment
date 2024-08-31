@@ -49,8 +49,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<div>Home Page</div>} /> // Default home page route
-      <Route path="/services/new" element={<Assignment />} /> // Your specified route for the assignment UI
+      <Route path="/" element={<Navigate to="/services/new" />} /> {/* Redirect to /services/new */}
+      <Route path="/services/new" element={<Assignment />} /> {/* Your specified route for the assignment UI */}
     </Routes>
   );
 }
